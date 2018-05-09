@@ -2,6 +2,8 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const fs = require('fs');
+const { Question } = require("./api/models/question");
 
 const app = express();
 
@@ -27,6 +29,14 @@ app.use((err, req, res) => {
     error: {
       message: err.message
     }
+  });
+});
+
+// initialize database
+fs.readFile('seed/quotes.json', (err, data) => {
+  let quote = JSON.parse(data);
+  Question.insertMany(quote.questions, (error, docs) => {
+    console.log('Database initiated...');
   });
 });
 
