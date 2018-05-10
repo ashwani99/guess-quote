@@ -32,12 +32,4 @@ app.use((err, req, res) => {
   });
 });
 
-// initialize database
-fs.readFile('seed/quotes.json', (err, data) => {
-  let quote = JSON.parse(data);
-  Question.insertMany(quote.questions, (error, docs) => {
-    console.log('Database initiated...');
-  });
-});
-
 module.exports = app;

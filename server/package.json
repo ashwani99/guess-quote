@@ -4,6 +4,7 @@
   "description": "RESTful API for GuessTheQuote",
   "main": "server.js",
   "scripts": {
+    "seed": "node seeder.js",
     "start": "nodemon server.js --config nodemon.json",
     "test": "jest --watch --runInBand"
   },
