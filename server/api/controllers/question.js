@@ -1,6 +1,6 @@
-const { Question } = require("../models/question");
+const Question = require("../models/question");
 
-exports.get_questions = (req, res) => {
+exports.get = (req, res) => {
     const limit = Number(req.query.limit);
 
     if (!limit) {
@@ -18,7 +18,7 @@ exports.get_questions = (req, res) => {
                 .limit(limit)
                 .exec()
         })
-        .then(quotes_json => {
-            res.send(quotes_json);
+        .then(quotes => {
+            res.send(quotes);
         });
 };

@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { Question } = require("./api/models/question");
+const Question = require("./api/models/question");
 const mongoose = require("mongoose");
 const env = require("dotenv").config();
 if (env.error) {
