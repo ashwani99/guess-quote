@@ -1,24 +1,22 @@
 const Question = require("../models/question");
 
 exports.get = (req, res) => {
-    const limit = Number(req.query.limit);
+  const limit = Number(req.query.limit);
 
-    if (!limit) {
-        res.status(404).json({
-            error: 'limit is not provided'
-        });
+  if (!limit) {
+    res.status(404).json({
+      error: { message: "limit is not provided" }
+    });
+  }
+
+  let options = { limit: limit };
+  Question.findRandom({}, {}, options, (err, quotes) => {
+    if (!err) {
+      res.send(quotes);
+    } else {
+      res.status(500).json({
+        error: { message: "No results found" }
+      });
     }
-
-    Question.count()
-        .exec()
-        .then(count => {
-            const random = Math.floor(Math.random() * count);
-            return Question.find()
-                .skip(random)
-                .limit(limit)
-                .exec()
-        })
-        .then(quotes => {
-            res.send(quotes);
-        });
+  });
 };
